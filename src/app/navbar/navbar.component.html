@@ -1,0 +1,13 @@
+<nav style="background:#1976d2; color:white; padding:1em; display:flex; gap:2em; align-items:center;">
+	<a routerLink="/food" routerLinkActive="active" style="color:white; text-decoration:none; font-weight:bold;">Food</a>
+	<a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" style="color:white; text-decoration:none; font-weight:bold;">Recipes</a>
+	<span style="flex:1 1 auto;"></span>
+	<ng-container *ngIf="!authService.isLoggedIn()">
+		<button (click)="onLoginRegisterClick()" style="background:white; color:#1976d2; border:none; padding:0.5em 1em; border-radius:4px; font-weight:bold; cursor:pointer;">Login / Register</button>
+	</ng-container>
+	<ng-container *ngIf="authService.isLoggedIn()">
+		<button (click)="logout()" style="background:white; color:#1976d2; border:none; padding:0.5em 1em; border-radius:4px; font-weight:bold; cursor:pointer;">Logout</button>
+	</ng-container>
+</nav>
+<app-auth *ngIf="showAuth" (close)="showAuth = false" (click)="$event.stopPropagation()" class="auth-modal"></app-auth>
+<div *ngIf="showAuth" class="auth-backdrop" (click)="showAuth = false"></div>

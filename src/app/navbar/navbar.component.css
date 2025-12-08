@@ -1,0 +1,66 @@
+
+nav {
+	background: linear-gradient(90deg, #1976d2 60%, #2196f3 100%);
+	color: #fff;
+	padding: 1.2em 2em;
+	display: flex;
+	gap: 2em;
+	align-items: center;
+	border-radius: 0 0 16px 16px;
+	box-shadow: 0 2px 12px rgba(25, 118, 210, 0.08);
+	font-family: 'Inter', Arial, sans-serif;
+}
+
+nav a {
+	color: #fff;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 1.15em;
+	padding: 0.3em 0.8em;
+	border-radius: 6px;
+	transition: background 0.2s, color 0.2s;
+}
+nav a.active, nav a:hover {
+	background: rgba(255,255,255,0.18);
+	color: #fff;
+}
+
+nav button {
+	background: #fff;
+	color: #1976d2;
+	border: none;
+	border-radius: 6px;
+	padding: 0.5em 1.2em;
+	font-weight: 600;
+	font-size: 1em;
+	cursor: pointer;
+	box-shadow: 0 1px 4px rgba(25, 118, 210, 0.08);
+	transition: background 0.2s, color 0.2s;
+}
+nav button:hover {
+	background: #e3f2fd;
+	color: #125ea2;
+}
+
+.auth-modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: white;
+	border-radius: 8px;
+	box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+	z-index: 1001;
+	padding: 2em 2em 1em 2em;
+	min-width: 320px;
+}
+
+.auth-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0,0,0,0.3);
+	z-index: 1000;
+}

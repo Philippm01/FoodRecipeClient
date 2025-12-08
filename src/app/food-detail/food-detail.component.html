@@ -1,0 +1,10 @@
+<div *ngIf="food" class="food-detail-card">
+  <h3>{{ food.name }}</h3>
+  <p><label>Calories:</label> {{ food.calories ?? 'N/A' }}</p>
+  <p><label>Carbohydrates:</label> {{ food.carbohydrates ?? 'N/A' }}</p>
+  <p><label>Fats:</label> {{ food.fats ?? 'N/A' }}</p>
+  <p><label>Protein:</label> {{ food.protein ?? 'N/A' }}</p>
+</div>
+<div *ngIf="!food" class="food-detail-card">
+  <p>Loading food...</p>
+</div>

@@ -1,0 +1,60 @@
+<div *ngIf="recipe" class="recipe-detail-card">
+	<ng-container *ngIf="!editMode; else editForm">
+		<h3>{{ recipe.name }}</h3>
+		<p><label>Description:</label> {{ recipe.description }}</p>
+		<p><label>Ingredients:</label></p>
+		<ul>
+			<li *ngFor="let ing of ingredientDetails">
+				<a *ngIf="ing.name" [routerLink]="['/food', ing.id]" class="ingredient-link">{{ ing.name }} ({{ ing.weight }})</a>
+				<a *ngIf="!ing.name" [routerLink]="['/food', ing.id]" class="ingredient-link">ID: {{ ing.id }} ({{ ing.weight }})</a>
+			</li>
+		</ul>
+		<p><label>Calories:</label> {{ recipe.calories ?? 'N/A' }}</p>
+		<p><label>Carbohydrates:</label> {{ recipe.carbohydrates ?? 'N/A' }}</p>
+		<p><label>Fats:</label> {{ recipe.fats ?? 'N/A' }}</p>
+		<p><label>Protein:</label> {{ recipe.protein ?? 'N/A' }}</p>
+		<p><label>Portion Size:</label> {{ recipe.portionSize ?? 'N/A' }}</p>
+		<p><label>Preparation Time:</label> {{ recipe.preparationTime ?? 'N/A' }} min</p>
+		<p><label>Difficulty:</label> {{ recipe.difficulty ?? 'N/A' }}</p>
+		<button *ngIf="authService.isLoggedIn()" (click)="startEdit()">Edit</button>
+	</ng-container>
+	<ng-template #editForm>
+		<form (ngSubmit)="saveEdit()" class="edit-form">
+			<label>Name
+				<input [(ngModel)]="editRecipe.name" name="name" required />
+			</label>
+			<label>Description
+				<input [(ngModel)]="editRecipe.description" name="description" />
+			</label>
+			<label>Calories
+				<input type="number" [(ngModel)]="editRecipe.calories" name="calories" />
+			</label>
+			<label>Carbohydrates
+				<input type="number" [(ngModel)]="editRecipe.carbohydrates" name="carbohydrates" />
+			</label>
+			<label>Fats
+				<input type="number" [(ngModel)]="editRecipe.fats" name="fats" />
+			</label>
+			<label>Protein
+				<input type="number" [(ngModel)]="editRecipe.protein" name="protein" />
+			</label>
+			<label>Portion Size
+				<input type="number" [(ngModel)]="editRecipe.portionSize" name="portionSize" />
+			</label>
+			<label>Preparation Time
+				<input type="number" [(ngModel)]="editRecipe.preparationTime" name="preparationTime" />
+			</label>
+			<label>Difficulty
+				<input type="number" [(ngModel)]="editRecipe.difficulty" name="difficulty" />
+			</label>
+			<div class="error" *ngIf="updateError">{{ updateError }}</div>
+			<div class="form-actions">
+				<button type="submit" [disabled]="updateLoading">Save</button>
+				<button type="button" (click)="cancelEdit()">Cancel</button>
+			</div>
+		</form>
+	</ng-template>
+</div>
+<div *ngIf="!recipe" class="recipe-detail-card">
+	<p>Loading recipe...</p>
+</div>

@@ -1,0 +1,130 @@
+/* Add style for clickable ingredient links */
+.ingredient-link {
+	color: #1976d2;
+	text-decoration: underline;
+	cursor: pointer;
+	font-weight: 500;
+}
+.ingredient-link:hover {
+	color: #2196f3;
+	text-decoration: underline;
+}
+.edit-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1.2em;
+	background: #f7f9fc;
+	border-radius: 10px;
+	padding: 1.5em 1.5em 1em 1.5em;
+	box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+	margin-top: 1em;
+}
+.edit-form label {
+	display: flex;
+	flex-direction: column;
+	font-weight: 500;
+	color: #1976d2;
+	margin-bottom: 0.2em;
+}
+.edit-form input {
+	border: 1px solid #bbb;
+	border-radius: 4px;
+	padding: 0.5em 0.8em;
+	font-size: 1em;
+	margin-top: 0.2em;
+	background: #fff;
+}
+.edit-form .error {
+	color: #d32f2f;
+	margin-top: 0.5em;
+	font-size: 0.95em;
+}
+.edit-form .form-actions {
+	display: flex;
+	gap: 1em;
+	margin-top: 1em;
+}
+.edit-form button {
+	background: #1976d2;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	padding: 0.6em 1.5em;
+	font-weight: 600;
+	font-size: 1em;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+.edit-form button[type="button"] {
+	background: #aaa;
+}
+.edit-form button:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+}
+/* Modern, minimal, slick styling for recipe detail */
+.recipe-detail-card {
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+	padding: 2em 2em 1em 2em;
+	max-width: 480px;
+	margin: 2em auto;
+	font-family: 'Inter', Arial, sans-serif;
+}
+
+.recipe-detail-card h3 {
+	margin-top: 0;
+	font-size: 2em;
+	font-weight: 700;
+	color: #222;
+}
+
+.recipe-detail-card p,
+.recipe-detail-card ul {
+	margin: 0.5em 0;
+	color: #444;
+	font-size: 1.08em;
+}
+
+.recipe-detail-card ul {
+	padding-left: 1.2em;
+}
+
+.recipe-detail-card li {
+	margin-bottom: 0.3em;
+}
+
+.recipe-detail-card label {
+	font-weight: 500;
+	color: #1976d2;
+}
+
+.recipe-detail-card input {
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 0.4em 0.8em;
+	font-size: 1em;
+	margin-top: 0.2em;
+}
+
+.recipe-detail-card button {
+	background: #1976d2;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	padding: 0.6em 1.5em;
+	font-weight: 600;
+	font-size: 1em;
+	margin-top: 1em;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+.recipe-detail-card button:hover {
+	background: #125ea2;
+}
+.recipe-detail-card .error {
+	color: #d32f2f;
+	margin-top: 0.5em;
+	font-size: 0.95em;
+}

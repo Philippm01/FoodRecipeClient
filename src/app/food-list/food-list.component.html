@@ -1,0 +1,13 @@
+<div *ngIf="foods.length > 0">
+	<h2>Foods</h2>
+	<ul>
+		<li *ngFor="let food of foods">
+			<a [routerLink]="['/food', food.id]" style="cursor:pointer; text-decoration:underline;">
+				{{ food.name }}
+			</a>
+		</li>
+	</ul>
+</div>
+<div *ngIf="foods.length === 0">
+	<p>Loading foods...</p>
+</div>
