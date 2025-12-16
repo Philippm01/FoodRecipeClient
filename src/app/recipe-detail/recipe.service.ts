@@ -36,4 +36,14 @@ export class RecipeService {
     const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
     return this.http.put<Recipe>(`${this.apiUrl}/${id}`, data, { headers });
   }
+
+  deleteRecipe(id: number, token?: string): Observable<any> {
+    const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
+    return this.http.delete(`${this.apiUrl}/${id}`, { headers });
+  }
+
+  addRecipe(data: Partial<Recipe>, token?: string): Observable<Recipe> {
+    const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
+    return this.http.post<Recipe>(this.apiUrl, data, { headers });
+  }
 }

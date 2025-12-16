@@ -17,6 +17,7 @@
 		<p><label>Preparation Time:</label> {{ recipe.preparationTime ?? 'N/A' }} min</p>
 		<p><label>Difficulty:</label> {{ recipe.difficulty ?? 'N/A' }}</p>
 		<button *ngIf="authService.isLoggedIn()" (click)="startEdit()">Edit</button>
+		<button *ngIf="authService.isLoggedIn()" (click)="deleteRecipe()" [disabled]="deleteLoading" style="margin-left: 8px;">Delete</button>
 	</ng-container>
 	<ng-template #editForm>
 		<form (ngSubmit)="saveEdit()" class="edit-form">
@@ -47,11 +48,19 @@
 			<label>Difficulty
 				<input type="number" [(ngModel)]="editRecipe.difficulty" name="difficulty" />
 			</label>
-			<div class="error" *ngIf="updateError">{{ updateError }}</div>
-			<div class="form-actions">
-				<button type="submit" [disabled]="updateLoading">Save</button>
-				<button type="button" (click)="cancelEdit()">Cancel</button>
-			</div>
+			   <label>Ingredients</label>
+			   <div *ngFor="let ing of editIngredients; let i = index" class="ingredient-edit-row">
+				   <input type="number" [(ngModel)]="ing.id" name="ingredientId{{i}}" placeholder="ID" required style="width: 60px;" />
+				   <span *ngIf="getIngredientName(ing.id)">({{ getIngredientName(ing.id) }})</span>
+				   <input [(ngModel)]="ing.weight" name="ingredientWeight{{i}}" placeholder="Weight (e.g. 100)" required style="width: 120px;" />
+				   <button type="button" (click)="removeIngredientField(i)">Remove</button>
+			   </div>
+			   <button type="button" (click)="addIngredientField()">Add Ingredient</button>
+			   <div class="error" *ngIf="updateError">{{ updateError }}</div>
+			   <div class="form-actions">
+				   <button type="submit" [disabled]="updateLoading">Save</button>
+				   <button type="button" (click)="cancelEdit()">Cancel</button>
+			   </div>
 		</form>
 	</ng-template>
 </div>

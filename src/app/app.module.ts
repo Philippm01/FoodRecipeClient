@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
+import { RecipeCreateComponent } from './recipe-create/recipe-create.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FoodListComponent } from './food-list/food-list.component';
@@ -22,6 +23,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     AppComponent,
     RecipeDetailComponent,
     RecipeListComponent,
+    RecipeCreateComponent,
     NavbarComponent,
     FoodListComponent,
     FoodDetailComponent,

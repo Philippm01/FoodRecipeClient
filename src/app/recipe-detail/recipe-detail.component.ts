@@ -10,10 +10,27 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
+    deleteLoading = false;
+    deleteRecipe() {
+      if (!this.recipe) return;
+      if (!confirm('Are you sure you want to delete this recipe?')) return;
+      this.deleteLoading = true;
+      const token = this.authService.getToken() || undefined;
+      this.recipeService.deleteRecipe(this.recipe.id, token).subscribe({
+        next: () => {
+          window.location.href = '/';
+        },
+        error: err => {
+          this.updateError = err.error?.error?.message || 'Delete failed';
+          this.deleteLoading = false;
+        }
+      });
+    }
   recipe?: Recipe;
   ingredientDetails: { id: number, weight: string, name?: string }[] = [];
   editMode = false;
   editRecipe: Partial<Recipe> = {};
+  editIngredients: { id: number, weight: string }[] = [];
   updateError = '';
   updateLoading = false;
 
@@ -64,6 +81,7 @@ export class RecipeDetailComponent implements OnInit {
       preparationTime: this.recipe.preparationTime,
       difficulty: this.recipe.difficulty
     };
+    this.editIngredients = this.ingredientDetails.map(i => ({ id: i.id, weight: i.weight }));
     this.editMode = true;
     this.updateError = '';
   }
@@ -78,13 +96,24 @@ export class RecipeDetailComponent implements OnInit {
     this.updateLoading = true;
     this.updateError = '';
     const token = this.authService.getToken() || undefined;
+    let validIngredients = Array.isArray(this.editIngredients)
+      ? this.editIngredients.filter(i => i.id && i.weight && String(i.id).trim() && String(i.weight).trim())
+      : [];
+    if (validIngredients.length === 0) {
+      this.updateError = 'A recipe must have at least one ingredient.';
+      this.updateLoading = false;
+      return;
+    }
+    let ingredientsString = validIngredients.map(i => `${i.id} ${i.weight}`).join('\n');
     const payload = {
       ...this.recipe,
-      ...this.editRecipe
+      ...this.editRecipe,
+      ingredients: ingredientsString
     };
     this.recipeService.updateRecipe(this.recipe.id, payload, token).subscribe({
       next: updated => {
-        this.recipe = { ...this.recipe!, ...this.editRecipe };
+        this.recipe = { ...this.recipe!, ...this.editRecipe, ingredients: ingredientsString };
+        this.processIngredients();
         this.editMode = false;
         this.updateLoading = false;
       },
@@ -93,5 +122,18 @@ export class RecipeDetailComponent implements OnInit {
         this.updateLoading = false;
       }
     });
+  }
+
+  addIngredientField() {
+    this.editIngredients.push({id:0,weight:''});
+  }
+
+  getIngredientName(id: number): string | undefined {
+    const found = this.ingredientDetails.find(i => i.id === id);
+    return found?.name;
+  }
+
+  removeIngredientField(idx: number) {
+    this.editIngredients.splice(idx, 1);
   }
 }

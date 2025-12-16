@@ -1,0 +1,67 @@
+<div class="create-recipe-card">
+  <h2>Create New Recipe</h2>
+  <form (ngSubmit)="saveAdd()" class="edit-form">
+    <label>ID
+      <input type="number" [(ngModel)]="newRecipe.id" name="id" required min="26" />
+      <div class="helper-text">Enter a unique number greater than 25. This ID must not be used by any other recipe.</div>
+    </label>
+    <label>Name
+      <input [(ngModel)]="newRecipe.name" name="name" required />
+      <div class="helper-text">Text, required</div>
+    </label>
+    <label>Description
+      <input [(ngModel)]="newRecipe.description" name="description" />
+      <div class="helper-text">Text, required. Short description of the recipe.</div>
+    </label>
+    <label>Calories
+      <input type="number" [(ngModel)]="newRecipe.calories" name="calories" />
+      <div class="helper-text">Total calories, e.g 586</div>
+    </label>
+    <label>Carbohydrates
+      <input type="number" [(ngModel)]="newRecipe.carbohydrates" name="carbohydrates" />
+      <div class="helper-text">Total carbohydrates in grams, e.g 18</div>
+    </label>
+    <label>Fats
+      <input type="number" [(ngModel)]="newRecipe.fats" name="fats" />
+      <div class="helper-text">Total fats in grams, e.g 46</div>
+    </label>
+    <label>Protein
+      <input type="number" [(ngModel)]="newRecipe.protein" name="protein" />
+      <div class="helper-text">Total protein in grams, e.g 32</div>
+    </label>
+    <label>Portion Size
+      <input type="number" [(ngModel)]="newRecipe.portionSize" name="portionSize" />
+      <div class="helper-text">Portion size in grams e.g., 300</div>
+    </label>
+    <label>Preparation Time
+      <input type="number" [(ngModel)]="newRecipe.preparationTime" name="preparationTime" />
+      <div class="helper-text">Preparation time in minutes, e.g 30</div>
+    </label>
+    <label>Difficulty
+      <input type="number" [(ngModel)]="newRecipe.difficulty" name="difficulty" />
+      <div class="helper-text">Number, e.g 1,2,...</div>
+    </label>
+    <label>Ingredients</label>
+    <div class="helper-text">Add each ingredient by entering its unique food ID and the amount in number.</div>
+    <div *ngFor="let ing of newIngredients; let i = index" class="ingredient-edit-row">
+      <input type="number" [(ngModel)]="ing.id" name="ingredientId{{i}}" placeholder="ID" required style="width: 60px;" />
+      <input type="number" [(ngModel)]="ing.amount" name="ingredientAmount{{i}}" placeholder="Amount" required style="width: 80px;" min="1" />
+      <span>g</span>
+      <button type="button" (click)="removeIngredientField(i)">Remove</button>
+    </div>
+    <button type="button" (click)="addIngredientField()">Add Ingredient</button>
+    <style>
+    .helper-text {
+      font-size: 0.95em;
+      color: #1976d2;
+      margin-bottom: 6px;
+      margin-left: 2px;
+    }
+    </style>
+    <div class="error" *ngIf="addError">{{ addError }}</div>
+    <div class="form-actions">
+      <button type="submit" [disabled]="addLoading">Save</button>
+      <button type="button" (click)="cancelAdd()">Cancel</button>
+    </div>
+  </form>
+</div>

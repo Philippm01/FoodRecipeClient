@@ -1,3 +1,21 @@
+li.add-recipe-list-item {
+  background: #e3f2fd;
+  border: 2px dashed #1976d2;
+  color: #1976d2;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(25,118,210,0.06);
+  margin: 16px 0;
+  padding: 28px 32px;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+li.add-recipe-list-item:hover {
+  background: #bbdefb;
+  box-shadow: 0 4px 16px rgba(25,118,210,0.12);
+}
 ul {
   list-style: none;
   padding: 0;
